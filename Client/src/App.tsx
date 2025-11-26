@@ -4,13 +4,15 @@ import Hero from './components/Hero';
 import MenuSection from './components/MenuSection';
 import Footer from './components/Footer';
 import ShareModal from './components/ShareModal';
-import { menuCategories } from './data/menuData';
+import useMenuData from './hooks/useMenuData';
 
 function App() {
   const [isShareModalOpen, setIsShareModalOpen] = useState(false);
 
+  const { menuCategories, loading } = useMenuData();
+
   return (
-    <div className="min-h-screen  relative" dir="rtl">
+    <div className="min-h-screen relative" dir="rtl">
 
       <div
         className="fixed inset-0 bg-cover bg-center bg-fixed -z-10"
@@ -28,9 +30,15 @@ function App() {
 
       <main className="relative">
         <div className="relative container mx-auto px-4 py-24">
-          {menuCategories.map((category) => (
-            <MenuSection key={category.id} category={category} />
-          ))}
+          
+          {loading && (
+            <p className="text-center text-white text-xl">جارِ تحميل البيانات...</p>
+          )}
+
+          {!loading &&
+            menuCategories.map((category) => (
+              <MenuSection key={category.id} category={category} />
+            ))}
         </div>
       </main>
 

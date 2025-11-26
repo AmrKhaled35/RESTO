@@ -6,9 +6,20 @@ export interface MenuItem {
   image: string;
   category: string;
 }
-
 export interface Category {
-  id: string;
+  id: number;
   name: string;
-  items: MenuItem[];
+  description: string;
+  image: string;
+  isactive: number;
 }
+export interface FoodItem {
+  id: number;
+  name: string;
+  description: string;
+  price: number;
+  isactive: number;
+  image: string;
+  foodMenueCategory_id: number;
+}
+
